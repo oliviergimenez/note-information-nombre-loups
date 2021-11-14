@@ -44,16 +44,17 @@ df_cjsage <- overall_CJS(dataloup_gof,eff_gof)$degree_of_freedom - test3sr(datal
 stat_cjsage 
 df_cjsage
 1 - pchisq(stat_cjsage, df_cjsage)
-# ajustement satisfaisant une fois que effet age sur la survie pris en compte
-# on considere que l effet transient est un melange de transient et de jeunes
+# ajustement satisfaisant une fois effet age sur la survie pris en compte
+# on considere que effet transient est un melange de transient et de jeunes
 
 #----------- 3. Selection meilleur modele
 
 # Modeles consideres
-# - survie avec 2 classes d’âge, hom ou het (2)
-# - state transition avec ou pas (2)
-# - detection het ou pas (2)
-# - recovery het ou pas (2)
+# - pi: proportion constante
+# - phi: survie avec 2 classes d’âge, hom ou het, effet temps ou periode
+# - psi: transition avec ou pas
+# - p: detection het ou pas
+# - r: recovery het ou pas
 # 1: pi, phi(a2), p(mix), r(mix), psi
 # 2: pi, phi(a2), p, r(mix), psi
 # 3: pi, phi(a2), p(mix), r, psi
@@ -63,7 +64,7 @@ df_cjsage
 # 7: pi, phi(a2*mix), p(mix), r, psi
 # 8: pi, phi(a2*mix), p, r, psi
 # 9: pi, phi(a2), p(mix), r(mix)
-# 10: pi, phi(a2), p, r(mix
+# 10: pi, phi(a2), p, r(mix)
 # 11: pi, phi(a2), p(mix), r
 # 12: pi, phi(a2), p, r
 # 13: pi, phi(a2*mix), p(mix), r(mix)
@@ -75,10 +76,10 @@ df_cjsage
 # 19: pi, phi(a2*period), p(mix), r(mix), psi
 # nb param: 9, 8, 8, 7, 11, 10, 10, 9, 7, 6, 6, 5, 9, 8, 8, 7, 2*(k-1)+6, 4*(k-1)+5, 11 (k = nb occ capture)
 
-# quantites misc a definir
+# quantites misc
 dataloup_hiver <- as.data.frame(dat)
-s <- 5 # nb etats
-m <- 3 # nb events
+s <- 5 # nb etats (vivant classe 1, vivant classe 2, juste mort classe 1, juste mort classe 2, mort)
+m <- 3 # nb obs (pas detecte, detecte vivant, detecte mort)
 k <- dim(dataloup_hiver)[2]
 km1 <- k-1
 nh <- dim(dataloup_hiver)[1]
@@ -101,17 +102,17 @@ lc <- readRDS(file = "dat/lc.rds")
 # transpose donnees
 dataloup_hiver <- t(dataloup_hiver)
 	
-# nb parametres des 16 modeles
+# nb parametres
 nb_param <- c(9, 8, 8, 7, 11, 10, 10, 9, 7, 6, 6, 5, 9, 8, 8, 7, 2*km1+6, 4*km1+5, 11)
 nb_modl <- length(nb_param)
 
 # ajuste 19 modeles avec 3 jeux differents de valeurs initiales 
 # pour tenir compte de min locaux eventuels
-# on peut aller boire un cafe pendant que les modeles tournent
+# les temps de calcul sont longs
 res_mdl <- vector("list", nb_modl)
 nb_inits <- 3
 for (i in 1:nb_modl){
-  # pick current model
+  # considere modele courant
   mod <- paste('devCJS',i,sep='')
   res_tpmin <- vector("list", nb_inits)
   for (j in 1:nb_inits){
@@ -157,7 +158,7 @@ res <- data.frame(AIC = AIC,
                                  '18: pi, phi(a2*mix*t), p(mix), r(mix), psi',
                                  '19: pi, phi(a2*period), p(mix), r(mix), psi'))
 
-# reordonne selon les valeurs croissantes d AIC
+# reordonne selon valeurs croissantes AIC
 res.ordered <- res[order(AIC),]
 res.ordered
 
@@ -186,6 +187,7 @@ res.ordered
 
 # effet periode sur survie, et heterogeneite sur parametres detection
 # on se base sur modele 19 pour estimer les effectifs
+# les temps de calcul sont un tout petit peu longs
 nb_inits <- 3
 label_best_model <- 19
 mod <- paste('devCJS', label_best_model,sep='')
@@ -235,7 +237,7 @@ list(mle = param, CI = c(IClower, ICupper))
 
 #----------- 5. effectif estime et int de confiance par bootstrap
 
-# on peut aller prendre un autre cafe, voire deux, les simulations tournent pendant tres longtemps
+# les temps de calcul sont tres tres longs
 nbMC <- 500 # nb bootstraps
 xx <- matrix(NA,nbMC,nb_param[label_best_model]) # store parameters
 Nhet <- NA
@@ -355,7 +357,7 @@ apply(Nhet2, 2, quantile, c(2.5,50,97.5)/100, na.rm = TRUE)
 #-- au fil de l'eau au regard des analyses génétiques en continu (confirmation de génotype 
 #-- ou information a posteriori par exemple au fur et a mesure de la consolidation 
 #-- des empreintes de génotypages grâce aux recaptures) 
-#-- les donnees communiquees a la DREAL AURA en 2021 sont les suivantes :
+#-- les estimations communiquees a la DREAL AURA en 2021 sont les suivantes :
 
 dat <- matrix(c(1995,   12.00,  17.1,
                 1996,   15.00,  35.4,
@@ -418,7 +420,7 @@ ub95$root
 mod2 <- lm(CMR ~ b1(EMR, bp) + b2(EMR, bp), data = dat)
 
 # comparaison ajustement des 2 modeles mod = lineaire, et mod2 = reg par morceaux
-# la regression par morceaux l emporte
+# la regression par morceaux recoit plus de support selon AIC
 AIC(mod, mod2)
 
 # graphiquement
@@ -433,11 +435,11 @@ dat %>%
   geom_point(aes(x = EMR, y = CMR), size = 3, color = "black") +
   labs(x = 'EMR', y = 'CMR')
 
-#-- prediction
+#-- prediction du nombre de loups 
+#-- hivers 2019-2020 et 2020-2021
+#-- sur base calibration capture-recapture EMR
 new <- data.frame(an = c(2019, 2020), 
                   EMR = c(301,403))
-
-# reg seg
 pred_segreg <- predict(mod2, new, interval = "prediction")
 pred_segreg
 
@@ -467,6 +469,7 @@ tendance_nb_loups <- dat_cmr %>%
                                  "prédiction via calibration")) + 
   theme(legend.position = c(0.3, 0.8),
         legend.background = element_rect(fill = alpha('white', 0.4)))
+tendance_nb_loups
 
 ggsave(plot = tendance_nb_loups, 
        filename = "fig/nbloupestim.png", 

@@ -188,10 +188,10 @@ res.ordered
 # effet periode sur survie, et heterogeneite sur parametres detection
 # on se base sur modele 19 pour estimer les effectifs
 # les temps de calcul sont un tout petit peu longs
-nb_inits <- 3
+nb_inits <- 1
 label_best_model <- 19
 mod <- paste('devCJS', label_best_model,sep='')
-res_tpmin = vector("list", nb_inits)
+res_tpmin <- vector("list", nb_inits)
 for (j in 1: nb_inits){
 	binit <- runif(nb_param[label_best_model])
 	tpmin = optim(binit,eval(parse(text=mod)),NULL, hessian=T, dataloup_hiver,eff,

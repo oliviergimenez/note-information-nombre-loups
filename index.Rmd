@@ -1,5 +1,5 @@
 ---
-title: Comment compte-t-on les loups en France ? Une méthode scientifique fruit d’un partenariat de 15 ans entre le CNRS et l’OFB
+title: Comment compte-t-on les loups en France ? Une méthode scientifique fruit d’un partenariat de 15 ans entre CNRS et OFB
 author: "Olivier Gimenez"
 date: "Novembre 2021"
 output: tint::tintHtml

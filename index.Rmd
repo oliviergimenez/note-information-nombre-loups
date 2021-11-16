@@ -1,0 +1,75 @@
+---
+title: Comment compte-t-on les loups en France ? Une méthode scientifique fruit d’un partenariat de 15 ans entre le CNRS et l’OFB
+author: "Olivier Gimenez"
+date: "Novembre 2021"
+output: tint::tintHtml
+---
+
+```{r setup, include=FALSE}
+library(tint)
+# invalidate cache when the package version changes
+knitr::opts_chunk$set(tidy = FALSE, cache.extra = packageVersion('tint'))
+options(htmltools.dir.version = FALSE)
+```
+
+# Le nombre de loups : une question centrale mais complexe
+
+Après des siècles de déclin causé par des politiques d’éradication, la destruction de leur habitat et la réduction de leurs proies, les grands carnivores font leur retour en Europe^[Chapron G. et al. (2014). Recovery of large carnivores in Europe's modern human-dominated landscapes. Science 346: 1517‑19. https://www.science.org/doi/10.1126/science.1257553] depuis une cinquantaine d’années. 
+
+Toutefois, ces espèces évoluent dans des montagnes et forêts où les humains font de l’élevage, de l’apiculture, chassent ou pratiquent tourisme et loisirs. La coïncidence des activités humaines et de la présence des carnivores génère parfois des conflits comme ceux liés à la prédation du loup sur des animaux d’élevage^[http://www.auvergne-rhone-alpes.developpement-durable.gouv.fr/constats-et-dommages-r1326.html], en particulier les moutons. Dans ce contexte, la question du nombre de loups revient régulièrement, en lien avec les prélèvements dérogatoires autorisés par l’État pour la protection des troupeaux, indexés sur ce nombre.
+
+Estimer les effectifs de populations d’animaux sauvages et leurs variations au cours du temps est une question au cœur de la dynamique des populations^[Bacaër N. (2009). Histoires de mathématiques et de populations. Paris: Vuibert. https://store.cassini.fr/fr/le-sel-et-le-fer/69-histoires-de-mathematiques-et-de-populations.html], une discipline scientifique dont les fondements reposent sur l’écologie et les mathématiques^.
+
+# Comment compte-t-on les loups ?
+
+En France comme ailleurs, le dénombrement exhaustif de la population est impossible car les loups sont très difficiles à voir et vivent sur de grands espaces. En France, c’est grâce à la combinaison d’informations génétiques sur l’espèce et d’analyses statistiques qu’on estime le nombre de loups. Cette estimation est réalisée dans le cadre d’un partenariat scientifique de 15 ans entre l’OFB et le CNRS. 
+
+L’identification individuelle des animaux par leur ADN, répétée dans le temps, est la clé pour estimer le nombre de loups. Si cet effort d’identification individuelle n’est pas fait, alors on peut compter plusieurs fois le même individu^[Bischof R. et al. (2016). Wildlife in a politically divided world: Insularism inflates estimates of Brown bear abundance. Conservation Letters 9: 122‑30. https://doi.org/10.1111/conl.12183] et ainsi surestimer les effectifs, ou encore se tromper dans les tendances démographiques sur la population^[Gervasi V. et al. (2014). The risks of learning: Confounding detection and demographic trend when using count-based indices for population monitoring. Ecology and Evolution 4: 4637‑48. https://doi.org/10.1002/ece3.1258].
+
+L’OFB a mis en place un réseau de suivi participatif de l’espèce^[Duchamp C. et al. (2011). Wolf monitoring in France: A dual-frame process to survey time- and space-related changes in the population. Hystrix 23: 14‑28. https://doi.org/10.4404/hystrix-23.1-4559; voir aussi https://www.loupfrance.fr/suivi-du-loup/reseau-loup-lynx/] sur tout le territoire national, le réseau "loup-lynx", composé de quelques 4000 participants formés. Ces observateurs collectent du matériel génétique laissé par les loups (déjections, poils, urines et dépouilles) dont l’analyse permet d’identifier les individus grâce à leur ADN. 
+
+Toutefois, ces données génétiques brutes n’offrent qu’une image imparfaite du nombre de loups. Il est impossible de récolter des indices de tous les loups présents en France. Si on manque un loup présent à un endroit donné, on conclut à tort que l’animal n’y est pas présent ou qu’il est mort, sous-estimant ainsi l’effectif total. Il faut donc estimer la probabilité de détection des loups. Par exemple, si l’on a une chance sur deux de détecter un loup, et qu’on en dénombre cinq, le nombre de loups est en fait dix. 
+
+En plus d’être imparfaite, la détection varie selon l’âge ou le statut social des loups (par exemple : dominant ou dominé). Si on l’ignore, cette hétérogénéité individuelle génère de gros risques d’erreur dans l’estimation du nombre de loups et de leur mortalité^[Fletcher D. et al. (2012). Bias in estimation of adult survival and asymptotic population growth rate caused by undetected capture heterogeneity. Methods in Ecology and Evolution 3: 206‑16. https://doi.org/10.1111/j.2041-210X.2011.00137.x].
+
+Grâce à trois des laboratoires de recherche en écologie scientifique les plus importants en France (LECA, LBBE et CEFE^[LECA : https://leca.osug.fr/, LBBE : https://lbbe.univ-lyon1.fr/fr et CEFE : https://www.cefe.cnrs.fr/fr/]), le CNRS a développé des méthodes statistiques dites de "capture-recapture" pour estimer le nombre de loups^[Cubaynes S. et al. (2010). Importance of accounting for detection heterogeneity when estimating abundance: The case of French wolves. Conservation Biology 24: 621‑26. https://doi.org/10.1111/j.1523-1739.2009.01431.x] et la croissance de la population^[Marescot et a. (2011). Capture–recapture population growth rate as a robust tool against detection heterogeneity for population management. Ecological Applications 21: 2898‑2907. https://doi.org/10.1890/10-2321.1] en corrigeant le nombre d’animaux détectés par la probabilité que des loups échappent à la détection. Le CNRS a également montré comment mesurer ce degré d’hétérogénéité^[Turek D. et al. (2021). Bayesian non-parametric detection heterogeneity in ecological models. Environmental and Ecological Statistics 28: 355-381.  https://doi.org/10.1007/s10651-021-00489-1] dans la détection des loups et résoudre le problème^[Voir note 9.].
+
+
+# Combien de loups en France
+
+Développée en 2010^[Voir note 9.], la méthode d’estimation du nombre de loups a été affinée pour rester au plus près de la réalité des données du terrain. D’abord en 2017, à l’occasion de l’expertise scientifique collective^[Duchamp C., Chapron G., Gimenez O., Robert A.,  Sarrazin F., Beudels-Jamar R., Le Maho Y. (2017). Expertise collective scientifique sur la viabilité et le devenir de la population de loups en France à long terme. Sous la coordination ONCFS-MNHN 
+de Guinot-Ghestem M., Haffner  P.,  Marboutin  E.,  Rousset  G.,  Savoure-Soubelet  A.,  Siblet  J.-P., 
+Trudelle L. https://www.patrinat.fr/sites/patrinat/files/atoms/files/2018/10/expertise_collective_loup_04.04.2017.pdf] sur le devenir de la population de loups en France commandée par le ministère de la transition écologique. Ensuite en 2020, comme décrit dans une note technique rédigée par l’OFB et le CNRS^[Drouet-Hoguet N., O. Gimenez et C. Duchamp (2020). Mise à jour des effectifs et paramètres démographiques de la population de loups en France : conséquences sur la viabilité de la population à long terme. https://www.loupfrance.fr/wp-content/uploads/Note_MAJ-effectifs_Survie-VD.pdf].
+
+Les dernières analyses montrent une forte hétérogénéité dans la détection des individus : 20% des loups ont une probabilité de détection élevée estimée à 0,83 (0,65-0,92) et 80% des loups ont une probabilité de détection estimée à 0,33 (0,23-0,48), soit une chance sur trois d’être détecté. Concernant la probabilité de survie, elle était estimée à 0,74 (0,68-0,78) avant 2014 et passe à 0,58 (0,43-0,72) pour la période de 2014-2019, soit une mortalité moyenne de 42%. 
+
+Grâce aux estimations de détection et de mortalité, réévaluées chaque année, une estimation du nombre de loups devient possible. La population française était estimée à 624 loups (intervalle de prédiction : 414-834) en sortie d’hiver 2020-2021^[Les données et le programme informatique qui ont permis d’obtenir ces estimations sont disponibles ici : https://github.com/oliviergimenez/note-information-nombre-loups].
+
+# De nombreux pays comptent aujourd’hui leurs loups <br> avec la même méthode que la France
+
+L’Italie^[Marucco F. et al. (2009). Wolf survival and population trend using non-invasive capture–recapture techniques in the Western Alps. Journal of Applied Ecology 46: 1003-1010. https://doi.org/10.1111/j.1365-2664.2009.01696.x], la Norvège, la Suède^[Bischof R. (2020). Estimating and forecasting spatial population dynamics of apex predators using transnational genetic monitoring. Proceedings of the National Academy of Sciences 117: 30531‑38. https://doi.org/10.1073/pnas.2011383117] et le Portugal ont engagé un partenariat avec le CNRS pour le comptage de leurs loups et utilisent la combinaison des analyses génétiques et des méthodes de capture-recapture. L’Espagne^[López-Bao J. et al. (2018). Toward reliable population estimates of wolves by combining spatial capture-recapture models and non-invasive DNA monitoring. Scientific Reports 8: 2177. https://doi.org/10.1038/s41598-018-20675-9] utilise aussi le suivi génétique et les méthodes de capture-recapture afin d’estimer le nombre de loups.
+
+
+Il y a consensus dans la communauté scientifique internationale sur la nécessité d’utiliser l’identification individuelle et les méthodes de capture-recapture pour estimer le nombre de loups, et plus généralement les effectifs des populations de grands carnivores.
+
+# S'adapter pour continuer d’informer la gestion <br> des dommages sur les troupeaux domestiques
+
+L’incertitude autour du nombre estimé de loups augmente au cours du temps, comme on s’y attend pour une population dont le nombre d’individus augmente ainsi que son extension géographique. Face à ce constat, le CNRS et l’OFB travaillent au développement d’un nouvel indicateur géographique de la population de loups, fondé sur la dynamique de colonisation et l’intensité de présence de l’espèce. Outre une meilleure intégration des données disponibles, cet indicateur permettrait d’informer plus efficacement la gestion des dommages sur les troupeaux domestiques tout en renseignant sur l’état de conservation de l’espèce. 
+
+# A retenir
+
++ Dénombrer exhaustivement le nombre de loups est impossible, en France comme ailleurs. On a donc recours à un échantillonnage de la population grâce à un réseau participatif d’observateurs : le réseau "loup-lynx".
++ Ce réseau collecte le matériel génétique (déjections, poils, urines, dépouilles) qui permet d’identifier individuellement les loups détectés par leur ADN.
++ Ces données sont analysées grâce à des méthodes statistiques qui corrigent le nombre de loups détectés par la probabilité que des individus échappent à la détection, ceci afin d’estimer le nombre total de loups. 
++ La méthode d’estimation du nombre de loups en France repose sur un partenariat scientifique de 15 ans entre le CNRS et l’OFB, et a été évaluée par des scientifiques indépendants d’autres pays.
++ Les pays européens qui comptent le nombre de loups chez eux utilisent la même méthode que la France.
++ A la sortie de l’hiver 2020-2021, la population française a été estimée à 624 loups, avec un intervalle de prédiction allant de 414 à 834.
++ L’incertitude autour du nombre estimé de loups augmente. Le CNRS et l’OFB développent un nouvel indicateur géographique de la population de loups pour continuer d’informer la gestion des dommages sur les troupeaux domestiques et renseigner sur l’état de conservation de l’espèce.
+
+# Biographie de l'auteur
+
+Olivier Gimenez est docteur en statistique appliquée à la dynamique des populations d’animaux sauvages. Directeur de recherche au CNRS, auteur et co-auteur de plus de 200 articles et ouvrages scientifiques, il étudie la démographie et la distribution des grands mammifères. Il a créé et dirigé le groupement de recherche du CNRS sur l’écologie statistique. Il a été membre du conseil scientifique du plan national d’actions sur le loup et les activités d’élevage, et préside le conseil scientifique du plan national d’actions sur le lynx boréal. 
+
+Site : https://oliviergimenez.github.io/    
+Contact : olivier.gimenez@cefe.cnrs.fr     
+
